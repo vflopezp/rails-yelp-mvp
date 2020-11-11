@@ -10,14 +10,20 @@
 <p>Phone: <%= @restaurant.phone_number %></p>
 <p>Category: <%= @restaurant.category %></p>
 <p>
-  "Reviews: "
+  Reviews:
   <ul class="list-group">
     <% @restaurant.reviews.each do |review| %>
-      <li class="list-group-item"><%= review.content %></li>
+      <li class="list-group-item">
+        <%= review.content %>
+        <%= link_to "Remove",
+                  review_path(review),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
+      </li>
    <% end %>
   </ul>
 </p>
 
 
-<%= link_to 'Leave a review', new_restaurant_review_path(@restaurant.id) %>
-<%= link_to "Back", restaurants_path %>
+<%= link_to 'Leave a review', new_restaurant_review_path(@restaurant.id), class: "btn btn-primary" %>
+<%= link_to "Back", restaurants_path, class: "btn btn-primary" %>
